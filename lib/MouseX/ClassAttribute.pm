@@ -1,8 +1,19 @@
 package MouseX::ClassAttribute;
 
-use strict;
-use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.001';
+
+use Mouse;
+use Exporter 'import';
+our @EXPORT = 'class_has';
+
+use MouseX::ClassAttribute::Meta::Attribute;
+use MouseX::ClassAttribute::Meta::Class;
+use MouseX::ClassAttribute::Meta::Method::Accessor;
+
+sub class_has {
+    my $meta = Mouse::Meta::Class->initialize(caller);
+    $meta->add_class_attribute(@_);
+}
 
 1;
 __END__
