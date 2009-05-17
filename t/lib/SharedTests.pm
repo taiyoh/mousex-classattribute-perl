@@ -10,9 +10,9 @@ use Test::More;
 {
     package HasClassAttribute;
 
-    use Moose qw( has );
-    use MooseX::ClassAttribute;
-    use MooseX::AttributeHelpers;
+    use Mouse qw( has );
+    use MouseX::ClassAttribute;
+    use MouseX::AttributeHelpers;
 
     use vars qw($Lazy);
     $Lazy = 0;
@@ -82,7 +82,7 @@ use Test::More;
           default => 5,
         );
 
-    no Moose;
+    no Mouse;
 
     sub BUILD
     {
@@ -103,7 +103,7 @@ use Test::More;
 {
     package Delegatee;
 
-    use Moose;
+    use Mouse;
 
     has 'units' =>
         ( is      => 'ro',
@@ -115,14 +115,14 @@ use Test::More;
           default => 'blue',
         );
 
-    no Moose;
+    no Mouse;
 }
 
 {
     package Child;
 
-    use Moose;
-    use MooseX::ClassAttribute;
+    use Mouse;
+    use MouseX::ClassAttribute;
 
     extends 'HasClassAttribute';
 
@@ -134,7 +134,7 @@ use Test::More;
           default => 'thing',
         );
 
-    no Moose;
+    no Mouse;
 }
 
 sub run_tests
