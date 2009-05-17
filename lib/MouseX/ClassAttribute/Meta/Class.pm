@@ -9,7 +9,6 @@ use warnings;
     {
         my %CACHE_CLASS_DATA;
 
-        #FIXME
         sub has_class_attribute {
             my $self = shift;
             my $name = shift;
@@ -24,13 +23,12 @@ use warnings;
 
         sub get_class_attribute_list {
             my $self = shift;
-            return keys %CACHE_CLASS_DATA;
+            return keys %{ $CACHE_CLASS_DATA{$self->name} };
         }
 
-        #FIXME
         sub get_class_attribute_map {
-            # ??
-            return %CACHE_CLASS_DATA;
+            my $self = shift;
+            return values %{$CACHE_CLASS_DATA{$self->name}};
         }
 
         #sub add_class_attribute(...)
@@ -41,9 +39,10 @@ use warnings;
             return delete $CACHE_CLASS_DATA{$self->name}{$name};
         }
 
-        #FIXME
         sub get_all_class_attributes {
-            return %CACHE_CLASS_DATA;
+            my $self = shift;
+            # ??
+            return values %{ $CACHE_CLASS_DATA{$self->name} };
         }
 
         sub find_class_attribute_by_name {
@@ -61,19 +60,15 @@ use warnings;
             return $CACHE_CLASS_DATA{$self->name}{$name};
         }
 
-        #FIXME
         sub set_class_attribute_value {
             my $self = shift;
             my ( $name, $value ) = @_;
-            if(!$value->{value}) {
-                $value->{value} = ref($value->default) eq 'CODE'
-                    ? $value->default->($value)
-                    : $value->default;
-            }
+            $value->{value} ||= ref($value->default) eq 'CODE'
+                ? $value->default->($value)
+                : $value->default;
             $CACHE_CLASS_DATA{$self->name}{$name} = $value;
         }
 
-        #FIXME
         sub clear_class_attribute_value {
             my $self = shift;
             my $name = shift;

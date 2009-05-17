@@ -15,6 +15,15 @@ sub class_has {
     $meta->add_class_attribute(@_);
 }
 
+sub unimport {
+    my $caller = caller;
+
+    no strict 'refs';
+    for my $keyword (@EXPORT) {
+        delete ${ $caller . '::' }{$keyword};
+    }
+}
+
 1;
 __END__
 
