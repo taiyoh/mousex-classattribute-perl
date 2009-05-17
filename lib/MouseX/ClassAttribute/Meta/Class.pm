@@ -9,18 +9,17 @@ use warnings;
     {
         my %CACHE_CLASS_DATA;
 
+        #FIXME
         sub has_class_attribute {
             my $self = shift;
             my $name = shift;
-            my $class = $self->name;
-            return !!$CACHE_CLASS_DATA{$class}{$name};
+            return !!$CACHE_CLASS_DATA{$self->name}{$name};
         }
 
         sub get_class_attribute {
             my $self = shift;
             my $name = shift;
-            my $class = $self->name;
-            return $CACHE_CLASS_DATA{$class};
+            return $CACHE_CLASS_DATA{$self->name};
         }
 
         sub get_class_attribute_list {
@@ -28,6 +27,7 @@ use warnings;
             return keys %CACHE_CLASS_DATA;
         }
 
+        #FIXME
         sub get_class_attribute_map {
             # ??
             return %CACHE_CLASS_DATA;
@@ -38,10 +38,10 @@ use warnings;
         sub remove_class_attribute {
             my $self = shift;
             my $name = shift;
-            my $class = $self->name;
-            return delete $CACHE_CLASS_DATA{$class}{$name};
+            return delete $CACHE_CLASS_DATA{$self->name}{$name};
         }
 
+        #FIXME
         sub get_all_class_attributes {
             return %CACHE_CLASS_DATA;
         }
@@ -61,6 +61,7 @@ use warnings;
             return $CACHE_CLASS_DATA{$self->name}{$name};
         }
 
+        #FIXME
         sub set_class_attribute_value {
             my $self = shift;
             my ( $name, $value ) = @_;
@@ -72,11 +73,11 @@ use warnings;
             $CACHE_CLASS_DATA{$self->name}{$name} = $value;
         }
 
+        #FIXME
         sub clear_class_attribute_value {
             my $self = shift;
             my $name = shift;
-            my $class = $self->name;
-            $CACHE_CLASS_DATA{$class}{$name} = undef;
+            $CACHE_CLASS_DATA{$self->name}{$name} = undef;
         }
     }
 
@@ -103,6 +104,7 @@ use warnings;
 
             for my $name (@$names) {
                 if ( $name =~ s/^\+// ) {
+                    #FIXME
                     $metaclass->clone_parent( $self, $name, @_ );
                 }
                 else {
