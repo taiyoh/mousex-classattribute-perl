@@ -1,6 +1,6 @@
 package MouseX::ClassAttribute;
 
-our $VERSION = '0.002';
+our $VERSION = '0.001';
 
 use Mouse;
 use Exporter 'import';
